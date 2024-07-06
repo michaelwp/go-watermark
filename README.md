@@ -55,4 +55,5 @@ func main() {
 
 This example demonstrates how to configure and apply a watermark to an image using the `go_watermark` package. Adjust the parameters as needed to fit your specific use case.
 
+for detail explanation visit: [How to Add a Watermark onto an Image Using Go](https://www.goblog.dev/articles/33)
 
