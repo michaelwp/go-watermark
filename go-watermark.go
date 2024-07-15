@@ -14,6 +14,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/disintegration/imaging"
 	"github.com/fogleman/gg"
 	"github.com/golang/freetype/truetype"
 	"golang.org/x/image/font/gofont/goregular"
@@ -50,17 +51,24 @@ type Watermark struct {
 	LineSpacing float64
 	Repeat
 	Rotate float64
+	ImgSize
 }
 
 type Repeat struct {
 	RepX, RepY, WordSpacing int
 }
 
+type ImgSize struct {
+	Width, Height int
+}
+
 func AddWatermark(watermark *Watermark) error {
-	bgImage, err := imageDecode(watermark.Image)
+	srcImage, err := imageDecode(watermark.Image)
 	if err != nil {
 		return fmt.Errorf("error decoding image: %v", err)
 	}
+
+	bgImage := imageResize(srcImage, watermark.ImgSize.Width, watermark.ImgSize.Height)
 
 	imgWidth := bgImage.Bounds().Dx()
 	imgHeight := bgImage.Bounds().Dy()
@@ -139,6 +147,10 @@ func imageDecode(imageFile string) (image.Image, error) {
 	}
 
 	return img, nil
+}
+
+func imageResize(srcImage image.Image, width, height int) image.Image {
+	return imaging.Resize(srcImage, width, height, imaging.Lanczos)
 }
 
 func loadFont(fontFile string) ([]byte, error) {

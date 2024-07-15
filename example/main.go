@@ -14,7 +14,6 @@ func main() {
 			OutputFile: "output.jpeg",
 			Text:       "79995782-PTGLOBALPRADANASEJAHTERA-227",
 			Position: goWatermark.Position{
-				PosY:  -50,
 				PosAY: 10,
 			},
 			Font: goWatermark.Font{
@@ -33,6 +32,9 @@ func main() {
 			},
 			LineSpacing: 25,
 			Rotate:      -30,
+			ImgSize: goWatermark.ImgSize{
+				Width: 250,
+			},
 		},
 	)
 	if err != nil {
