@@ -9,13 +9,14 @@ package go_watermark
 
 import (
 	"fmt"
-	"github.com/fogleman/gg"
-	"github.com/golang/freetype/truetype"
-	"golang.org/x/image/font/gofont/goregular"
 	"image"
 	"image/color"
 	"os"
 	"strings"
+
+	"github.com/fogleman/gg"
+	"github.com/golang/freetype/truetype"
+	"golang.org/x/image/font/gofont/goregular"
 )
 
 type Align int
@@ -48,6 +49,7 @@ type Watermark struct {
 	Align       Align
 	LineSpacing float64
 	Repeat
+	Rotate float64
 }
 
 type Repeat struct {
@@ -101,6 +103,8 @@ func DrawWatermark(font *truetype.Font, watermark *Watermark, dc *gg.Context, im
 	}
 
 	y := float64(posY)
+
+	dc.Rotate(gg.Radians(watermark.Rotate))
 
 	for divY := 0; divY <= watermark.RepY-1; divY++ {
 		wordSpaces := strings.Repeat(" ", watermark.WordSpacing)

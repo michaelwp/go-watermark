@@ -2,39 +2,40 @@ package main
 
 import (
 	"fmt"
-	goWatermark "github.com/michaelwp/go-watermark"
 	"image/color"
+
+	goWatermark "github.com/michaelwp/go-watermark"
 )
 
 func main() {
 	err := goWatermark.AddWatermark(
 		&goWatermark.Watermark{
-			Image:      "input.jpg",
-			OutputFile: "output.jpg",
-			Text:       "GO WATERMARK",
+			Image:      "input1.jpeg",
+			OutputFile: "output.jpeg",
+			Text:       "79995782-PTGLOBALPRADANASEJAHTERA-227",
 			Position: goWatermark.Position{
 				PosX:  0,
-				PosY:  0,
-				PosAY: 0,
+				PosY:  -50,
+				PosAY: 10,
 				PosAX: 0,
 			},
 			Font: goWatermark.Font{
-				FontSize: 20,
-				FontName: "arial.ttf",
+				FontSize: 12,
 			},
 			Color: color.RGBA{
 				R: 255,
 				G: 255,
 				B: 255,
-				A: 70,
+				A: 80,
 			},
 			Align: goWatermark.AlignCenter,
 			Repeat: goWatermark.Repeat{
-				RepY:        1000,
-				RepX:        15,
+				RepY:        20,
+				RepX:        10,
 				WordSpacing: 0,
 			},
-			LineSpacing: 50,
+			LineSpacing: 25,
+			Rotate:      -30,
 		},
 	)
 	if err != nil {
